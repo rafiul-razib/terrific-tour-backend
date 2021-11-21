@@ -74,6 +74,30 @@ async function run() {
             const result = await orderCollection.deleteOne(query)
             res.json(result)
         })
+
+    // Delete api for admin
+        app.delete("/manageOrders/:id", async(req,res)=>{
+            const id = req.params.id;
+            const query= {_id:ObjectId(id)};
+            const result = await orderCollection.deleteOne(query);
+            res.json(result)
+        })
+
+    // PUT api to update order status
+        // app.put("/booking/update/:id", async(req, res)=>{
+        //     const id = req.params.id;
+        //     const updatedStatus = req.body;
+        //     const filter = {_id: ObjectId(id)};
+        //     const options = {upsert: true}
+        //     const updateDoc = {
+        //         $set: {
+        //             status: updatedStatus.status,
+        //         }
+        //     }
+        //     const result = await cursor.updateOne(filter, updateDoc, options);
+        //     res.json(result)
+        //     console.log(req.body)
+        // })
     } finally {
     //   await client.close();
     }
