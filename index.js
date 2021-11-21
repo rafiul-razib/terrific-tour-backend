@@ -84,20 +84,19 @@ async function run() {
         })
 
     // PUT api to update order status
-        // app.put("/booking/update/:id", async(req, res)=>{
-        //     const id = req.params.id;
-        //     const updatedStatus = req.body;
-        //     const filter = {_id: ObjectId(id)};
-        //     const options = {upsert: true}
-        //     const updateDoc = {
-        //         $set: {
-        //             status: updatedStatus.status,
-        //         }
-        //     }
-        //     const result = await cursor.updateOne(filter, updateDoc, options);
-        //     res.json(result)
-        //     console.log(req.body)
-        // })
+        app.put("/update/:id", async(req, res)=>{
+            const id = req.params.id;
+            const updatedStatus = req.body;
+            const query = {_id: ObjectId(id)};
+            const result = await orderCollection.updateOne(query,{
+                $set:{
+                    status: updatedStatus.status,
+                }
+            })
+            res.json(result)
+
+            
+        })
     } finally {
     //   await client.close();
     }
